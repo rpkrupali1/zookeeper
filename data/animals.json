@@ -117,6 +117,16 @@
         "hungry"
       ],
       "id": "11"
+    },
+    {
+      "name": "Tiger",
+      "species": "Cat",
+      "diet": "folivore",
+      "personalityTraits": [
+        "anxious",
+        "goofy"
+      ],
+      "id": "12"
     }
   ]
 }

@@ -6,6 +6,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
+//front end files
+app.use(express.static('public'));
 const { animals } = require('./data/animals');
 
 function filterByQuery(query, animalsArray) {
@@ -92,7 +94,6 @@ app.get('/api/animals/:id', (req, res) => {
   if(result)
       res.json(result);
   else res.send(404);
-
 });
 
 app.post('/api/animals', (req,res) => {
@@ -105,7 +106,23 @@ app.post('/api/animals', (req,res) => {
     const animal = createNewAnimal(req.body, animals);
     res.json(animal);
   }
-})
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+app.get('/animals', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+app.get('/zookeepers', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
 app.listen(3001,()=>{
     console.log('Api server is now on port 3001');
